@@ -1,0 +1,12 @@
+/**/*:
+  ros__parameters:
+    broker:
+      host: mqtt-broker.local
+      port: 1888
+    bridge:
+      ros2mqtt:
+        ros_topics:
+          - /scan
+        /scan:
+          mqtt_topic: Lidar_Data
+          primitive: false

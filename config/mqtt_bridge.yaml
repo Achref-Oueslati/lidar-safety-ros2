@@ -1,0 +1,43 @@
+# mqtt_bridge.yaml
+# ROS 2 <-> MQTT bridge config for robot
+# Bridges: MQTT robot/control -> ROS /robot/joystick_cmd
+#          ROS /safety_zone_alert -> MQTT robot/alerts
+
+/**/*:
+  ros__parameters:
+    broker:
+      host: mqtt.example.com
+      port: 8883
+      user: "YOUR_MQTT_USERNAME"
+      pass: "YOUR_MQTT_PASSWORD"
+      tls:
+        enabled: true
+
+    bridge:
+      mqtt2ros:
+      # mqtt2ros:
+      #   mqtt_topics:
+      #     - robot/control
+      #   robot/control:
+      #     ros_topic: /robot/joystick_cmd
+      #     primitive: true
+        mqtt_topics:
+          - robot/safety_radius
+          # - robot/control
+        robot/safety_radius:
+          ros_topic: /robot/safety_radius
+          primitive: true
+        # robot/control:
+        #   ros_topic: /robot/joystick_cmd
+        #   primitive: true
+
+      ros2mqtt:
+        ros_topics:
+          - /safety_zone_alert
+          - /robot/heartbeat
+        /safety_zone_alert:
+          mqtt_topic: robot/alerts
+          primitive: true
+        /robot/heartbeat:
+          mqtt_topic: robot/heartbeat
+          primitive: true

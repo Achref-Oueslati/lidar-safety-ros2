@@ -1,0 +1,72 @@
+# ==============================================================================
+# Slamware SDK - SCAN-ONLY Configuration
+# ==============================================================================
+# This config file disables ALL features except laser scan publishing.
+# - Workers are created only if their *_pub_period > 0
+# - Setting period = 0 completely disables that feature
+# - Only scan_pub_period is enabled by default here
+# ==============================================================================
+
+slamware_ros_sdk_server_node:
+  ros__parameters:
+    # CONNECTION
+    ip_address: "192.168.11.1"
+    robot_port: 1445
+    reconn_wait_ms: 3000
+
+    # SCAN-ONLY FEATURES (ENABLED)
+    scan_pub_period: 0.1
+    angle_compensate: true
+    raw_ladar_data: false
+    ladar_data_clockwise: true
+    scan_in_odom: false
+    # FRAME IDS
+    laser_frame: "lidar_link"
+    robot_frame: "base_link"
+    odom_frame: "odom"
+    map_frame: "map"
+    robot_pose_frame: "body_link"
+    
+    # TOPIC NAMES
+    scan_topic: "/scan"
+    odom_topic: "/slamware_ros_sdk_server_node/odom"
+    robot_pose_topic: "/slamware_ros_sdk_server_node/robot_pose"
+    map_topic: "/slamware_ros_sdk_server_node/map"
+    map_info_topic: "/slamware_ros_sdk_server_node/map_metadata"
+    basic_sensors_info_topic: "/slamware_ros_sdk_server_node/basic_sensors_info"
+    basic_sensors_values_topic: "/slamware_ros_sdk_server_node/basic_sensors_values"
+    path_topic: "/slamware_ros_sdk_server_node/global_plan_path"
+    imu_raw_data_topic: "/slamware_ros_sdk_server_node/imu_raw_data"
+    imu_raw_mag_data_topic: "/slamware_ros_sdk_server_node/imu_raw_mag_data"
+
+    # SUBSCRIPTIONS (control topic names; subscriptions still get created,
+    # but worker publishers are disabled when their periods are 0)
+    vel_control_topic: "/cmd_vel"
+    goal_topic: "/move_base_simple/goal"
+
+    # WORKER PERIOD CONTROLS
+    robot_device_info_pub_period: 0.0    # controls ServerRobotDeviceInfoWorker
+    # note: RosConnectWorker is controlled via robot_basic_state_pub_period
+    # (there is no ros_connect_pub_period parameter in server_params.cpp)
+
+    # DISABLED FEATURES (set periods to 0 to completely disable)
+    odometry_pub_period: 0.0
+    robot_pose_pub_period: 0.0
+    map_update_period: 0.0
+    map_pub_period: 0.0
+    imu_raw_data_period: 0.0
+    basic_sensors_info_update_period: 0.0
+    basic_sensors_values_pub_period: 0.0
+    path_pub_period: 0.0
+    robot_basic_state_pub_period: 0.0
+    virtual_walls_pub_period: 0.0
+    virtual_tracks_pub_period: 0.0
+
+    # TF SETTINGS (scan-only defaults)
+    fixed_odom_map_tf: false
+    pub_accumulate_odometry: false
+    publish_tf: false
+
+    # MAP SYNC (not used when map_update_period/map_pub_period = 0)
+    map_sync_once_get_max_wh: 100.0
+    map_update_near_robot_half_wh: 8.0
