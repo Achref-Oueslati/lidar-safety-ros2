@@ -5,7 +5,8 @@ telemetry, and an obstacle-safety node.
 
 ## Components
 
-- `src/slamware_ros_sdk` and `src/slamware_sdk`: LiDAR driver and SDK
+- `src/slamware_ros_sdk` and `src/slamware_sdk`: LiDAR driver and SDK (Due to GitHub size restrictions, the following directories are omitted from the source tree. If you need these SDK packages to build the ROS workspace, please reach out via email or drop a request in the Issues tab.)
+ 
 - `src/scripts/obstacle_detection.py`: scan-based safety stop and status reporting
 - `src/config`: MQTT bridge and LiDAR driver configuration
 - `src/launch/robot_pi.launch.py`: launches the driver, bridge, and safety node
