@@ -1,0 +1,9 @@
+log/
+build/
+install/
+.vscode/
+.env
+.env.*
+!.env.example
+src/slamware_ros_sdk/
+src/slamware_sdk
